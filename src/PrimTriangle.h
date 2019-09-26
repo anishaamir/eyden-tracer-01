@@ -15,44 +15,35 @@ public:
 	 * @param c Position of the third vertex
 	 */
 	CPrimTriangle(Vec3f color, Vec3f a, Vec3f b, Vec3f c)
-		: CPrim(color)
-		, m_a(a)
-		, m_b(b)
-		, m_c(c)
-  	{}
-	virtual ~CPrimTriangle(void) = default;
-	
-	virtual bool Intersect(Ray& ray) override
+		: CPrim(color), v_x(a), v_y(b), v_z(c)
 	{
-		// --- PUT YOUR CODE HERE ---
-		Vec3f nab = (m_b - ray.org).cross(m_a - ray.org);
-		Vec3f nbc = (m_c - ray.org).cross(m_b - ray.org);
-		Vec3f nca = (m_a - ray.org).cross(m_c - ray.org);
-
-		float s_area = nab.dot(ray.dir) + nbc.dot(ray.dir) + nca.dot(ray.dir);
-		float lambda1 = nab.dot(ray.dir) / s_area;
-		float lambda2 = nbc.dot(ray.dir) / s_area;
-		float lambda3 = nca.dot(ray.dir) / s_area;
-
-		if (lambda1 < 0 || lambda2 < 0 || lambda3 < 0){
+	}
+	virtual ~CPrimTriangle(void) = default;
+	virtual bool Intersect(Ray &ray) override
+	{
+		Vec3f nab = (v_y - ray.org).cross(v_x - ray.org);
+		Vec3f nbc = (v_z - ray.org).cross(v_y - ray.org);
+		Vec3f nca = (v_x - ray.org).cross(v_z - ray.org);
+		float trea = nab.dot(ray.dir) + nbc.dot(ray.dir) + nca.dot(ray.dir);
+		float l1 = nab.dot(ray.dir) / trea;
+		float l2 = nbc.dot(ray.dir) / trea;
+		float l3 = nca.dot(ray.dir) / trea;
+		if (l1 < 0 || l2 < 0 || l3 < 0)
+		{
 			return false;
 		}
-
-		Vec3f p = lambda1 * m_a + lambda2 * m_b + lambda3 * m_c;
-
+		Vec3f p = l1 * v_x + l2 * v_y + l3 * v_z;
 		float t = p[0] / ray.dir[0];
-		if (t < Epsilon || t > ray.t){
+		if (t < Epsilon || t > ray.t)
+		{
 			return false;
 		}
-
 		ray.t = t;
-
 		return true;
 	}
 
-	
 private:
-	Vec3f m_a;	///< Position of the first vertex
-	Vec3f m_b;	///< Position of the second vertex
-	Vec3f m_c;	///< Position of the third vertex
+	Vec3f v_x;
+	Vec3f v_y;
+	Vec3f v_z;
 };

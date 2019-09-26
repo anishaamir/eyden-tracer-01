@@ -14,38 +14,34 @@ public:
 	 * @param normal Normal to the plane
 	 */
 	CPrimPlane(Vec3f color, Vec3f origin, Vec3f normal)
-		: CPrim(color)
-		, m_normal(normal)
-		, m_origin(origin)
+		: CPrim(color), m_normal(normal), m_origin(origin)
 	{
 		normalize(m_normal);
 	}
 	virtual ~CPrimPlane(void) = default;
-	virtual bool Intersect(Ray& ray) override
+	virtual bool Intersect(Ray &ray) override
 	{
 		// --- PUT YOUR CODE HERE ---
-		float numerator = m_normal.dot(ray.org - m_origin);
-		float denominator = m_normal.dot(ray.dir);
+		float num = m_normal.dot(ray.org - m_origin);
+		float dem = m_normal.dot(ray.dir);
 		float t;
-
-		if (denominator == 0){
+		if (dem == 0)
+		{
 			return 0;
 		}
-		else{
-			t = numerator / denominator;
+		else
+		{
+			t = num / dem;
 		}
-
-		if (t < Epsilon || t > ray.t){
+		if (t < Epsilon || t > ray.t)
+		{
 			return false;
 		}
-
 		ray.t = t;
-
 		return true;
 	}
 
-	
 private:
-	Vec3f m_normal;	///< Point on the plane
-	Vec3f m_origin;	///< Normal to the plane
+	Vec3f m_normal;
+	Vec3f m_origin;
 };

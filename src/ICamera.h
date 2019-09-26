@@ -30,14 +30,11 @@ public:
 	 * @retval false otherwise
 	 */
 	virtual bool InitRay(float x, float y, Ray& ray) = 0;
-	
 	/**
 	 * @brief Retuns the camera resolution
 	 * @return The camera resolution
 	 */
 	Size getResolution(void) const { return m_resolution; }
-	
-	
 private:
 	Size m_resolution;	///< Camera resolution
 };
