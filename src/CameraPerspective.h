@@ -17,7 +17,7 @@ public:
 		: ICamera(resolution), m_pos(pos), m_dir(dir), m_up(up)
 	{
 		// --- PUT YOUR CODE HERE ---
-		m_focus = 1 / tan(angle / 2 * Pif / 180);
+		m_focus = 1 / tan(angle / 2 * Pi / 180);
 		m_yAxis = m_up;
 		m_xAxis = m_dir.cross(m_up);
 		m_aspect = (float)resolution.width / (float)resolution.height;
