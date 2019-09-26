@@ -1,6 +1,3 @@
-// Perspective Camera class
-// Written by Sergey Kosov in 2005 for Rendering Competition
-#pragma once
 #include "ICamera.h"
 /**
  * @brief Perspective Camera class

@@ -41,6 +41,7 @@ public:
 		return true;
 	}
 
+	
 private:
 	Vec3f m_center;	///< Position of the center of the sphere
 	float m_radius;	///< Radius of the sphere
