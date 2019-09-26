@@ -30,7 +30,7 @@ public:
 
 	virtual bool InitRay(float x, float y, Ray& ray) override
 	{
-		// --- PUT YOUR CODE HERE ---
+		// --- PUT YOUR CODE HERE ---s
 		return true;
 	}
 
