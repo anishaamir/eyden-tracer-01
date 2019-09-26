@@ -21,22 +21,16 @@ public:
 	virtual ~CPrimPlane(void) = default;
 	virtual bool Intersect(Ray &ray) override
 	{
-		// --- PUT YOUR CODE HERE ---
-		float num = m_normal.dot(ray.org - m_origin);
-		float dem = m_normal.dot(ray.dir);
+		float den = -m_normal.dot(ray.org-m_origin);
+		float den2 = m_normal.dot(ray.dir);
 		float t;
-		if (dem == 0)
-		{
-			return 0;
-		}
-		else
-		{
-			t = num / dem;
-		}
-		if (t < Epsilon || t > ray.t)
-		{
+
+		if(den2 == 0) return false;
+		else		t = den / den2; 
+
+		if(t < Epsilon || t > ray.t)
 			return false;
-		}
+
 		ray.t = t;
 		return true;
 	}

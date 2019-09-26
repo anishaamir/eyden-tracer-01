@@ -20,16 +20,20 @@ public:
 	virtual ~CPrimSphere(void) = default;
 	virtual bool Intersect(Ray &ray) override
 	{
-		// --- PUT YOUR CODE HERE ---
-		float x = ray.dir.dot(ray.dir);
-		float y = 2 * ray.dir.dot(ray.org - m_center);
-		float z = (ray.org - m_center).dot(ray.org - m_center) - m_radius * m_radius;
-		float test = y * y - (4 * x * z);
-		if (test < 0)
+		Vec3f v1 = ray.org - m_center;
+		float i = ray.dir.dot(ray.dir);
+		float j = 2 * ray.dir.dot(v1);
+		float k = v1.dot(v1) - m_radius * m_radius;
+		float l = j * j - 4 * i * k;
+		if (l < 0)
 		{
 			return false;
 		}
-		float t = ((-y) + sqrt(test)) / x;
+		float t = (-j - sqrt(l)) / i;
+		if (t < Epsilon)
+		{
+			t = (-j + sqrt(l)) / i;
+		}
 		if (t < Epsilon || t > ray.t)
 		{
 			return false;

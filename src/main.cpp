@@ -21,14 +21,8 @@ Mat RenderFrame(ICamera &camera)
 			{
 				continue;
 			}
-			// Your code
 			Vec3f col = RGB(0, 0, 0); // background color
-			/*
-			 * Find closest intersection with scene
-			 * obj and calculate color
-			 */
 
-			// Your code
 			for (auto object : obj)
 			{
 				if (object->Intersect(ray))
